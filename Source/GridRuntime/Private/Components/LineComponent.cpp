@@ -22,6 +22,12 @@ public:
 		:FPrimitiveSceneProxy(InComponent, NAME_LineCompResourceNameForDebugging)
 	{}
 
+	virtual SIZE_T GetTypeHash() const override
+	{
+		static size_t UniquePointer;
+		return reinterpret_cast<size_t>(&UniquePointer);
+	}
+
 	virtual uint32 GetMemoryFootprint(void) const override { return (sizeof(*this) + GetAllocatedSize()); }
 
 	virtual FPrimitiveViewRelevance GetViewRelevance(const FSceneView* View) const override
